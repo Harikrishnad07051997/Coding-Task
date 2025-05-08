@@ -12,7 +12,8 @@ bash
 git clone <your-repo-url>
 cd task-metrics-exporter
 
-2. Run using Docker
+2. Run using Docker:
+
 docker build -t task-metrics-exporter .
 docker run -p 8000:8000 --env-file .env task-metrics-exporter
 
