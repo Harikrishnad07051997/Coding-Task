@@ -8,25 +8,27 @@ Features:
 
 How to run Locally:
 1. Clone the Repository
-bash
-git clone <your-repo-url>
-cd task-metrics-exporter
-
-2. Run using Docker:
+bash:
+git clone 
+cd task
+3. Run using Docker:
 
 docker build -t task-metrics-exporter .
 
 
 docker run -p 8000:8000 --env-file .env task-metrics-exporter
 
-3. Feed Test Data
-python test_data_feeder.py
+View metrics: http://localhost:8000/metrics
 
-Note:
-Environment Variables:
-| Variable   | Description      | Default |
-| ---------- | ---------------- | ------- |
-| APP\_HOST  | Host for the app | 0.0.0.0 |
-| APP\_PORT  | Port for the app | 8000    |
-| LOG\_LEVEL | Logging level    | INFO    |
+Run Prometheus in Docker:
 
+docker run -d -p 9090:9090 --name prometheus `
+  -v "D:\Task\prometheus.yml:/etc/prometheus/prometheus.yml" `
+  prom/prometheus
+
+Open Prometheus UI:
+http://localhost:9090
+
+Click on "Status" > "Targets" to verify Prometheus is successfully scraping task-metrics-exporter.
+
+You should see the job named task-metrics-exporter with the state UP.
